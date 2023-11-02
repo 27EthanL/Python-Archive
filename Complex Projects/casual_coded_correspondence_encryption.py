@@ -184,8 +184,52 @@ def decoding_friends():
     for letter in encoded_message:
         if letter in alphabet:
             enscribed_message += keyword[count]
-            count = (count + 1) % 7
         else:
             enscribed_message += letter
-    print(enscribed_message)
-decoding_friends()
+        count = (count + 1) % len(keyword)
+    for letter in range(len(encoded_message)):
+        if encoded_message[letter] in alphabet:
+            decoded_message += alphabet[(alphabet.find(encoded_message[letter]) - alphabet.find(enscribed_message[letter])) % 26]
+        else:
+            decoded_message += encoded_message[letter]
+    print(decoded_message)
+
+# decoding_friends()
+
+# Vigenere Decoder
+def vigenere_decoder(coded_message, keyword): 
+    alphabet = 'abcdefghijklmnopqrstuvwxyz'
+    decoded_message = ''
+    enscribed_message = ''
+    count = 0
+    for letter in coded_message:
+        if letter in alphabet:
+            enscribed_message += keyword[count]
+        else:
+            enscribed_message += letter
+        count = (count + 1) % len(keyword)
+    for letter in range(len(coded_message)):
+        if coded_message[letter] in alphabet:
+            decoded_message += alphabet[(alphabet.find(coded_message[letter]) - alphabet.find(enscribed_message[letter])) % 26]
+        else:
+            decoded_message += coded_message[letter]
+    print(decoded_message)
+
+# Vigenere Encoder
+def vigenere_encoder(message, keyword):
+    alphabet = 'abcdefghijklmnopqrstuvwxyz'
+    encoded_message = ''
+    enscribed_message = ''
+    count = 0
+    for letter in message:
+        if letter in alphabet:
+            enscribed_message += keyword[count]
+        else:
+            enscribed_message += letter
+        count = (count + 1) % len(keyword)
+    for letter in range(len(message)):
+        if message[letter] in alphabet:
+            encoded_message += alphabet[(alphabet.find(message[letter]) + alphabet.find(enscribed_message[letter])) % 26]
+        else:
+            encoded_message += message[letter]
+    print(encoded_message)
